@@ -1,5 +1,5 @@
-# NEA
-A-Level NEA Computer Science project
-    Inevntory management system
+# A-Level NEA Computer Science project
+# Project Title
+Inventory management system
 # Authors
 james-cole-174
