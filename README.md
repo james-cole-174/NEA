@@ -1,5 +1,5 @@
 # NEA
 A-Level NEA Computer Science project
-Inevntory management system
+    Inevntory management system
 # Authors
 james-cole-174
