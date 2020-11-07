@@ -1,4 +1,4 @@
-# A-Level NEA Computer Science project
+### A-Level NEA Computer Science project
 # Project Title
 Inventory management system
 # Authors
