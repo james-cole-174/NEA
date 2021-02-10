@@ -9,9 +9,18 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor()
 
-mycursor.execute("SELECT * FROM customers")
+#mycursor.execute("CREATE TABLE customers_test (name VARCHAR(255), address VARCHAR(255))")
 
-myresult = mycursor.fetchall()
+sql = "INSERT INTO customers_test (name, address) VALUES (%s, %s)"
+val = ("John", "Highway 21")
+mycursor.execute(sql, val)
+mydb.commit()
+print(mycursor.rowcount, "record inserted.")
 
-for x in myresult:
-    print(x)
+def getAllTable(table_name):
+    mycursor.execute("SELECT * FROM (%s)" % table_name)
+    myresult = mycursor.fetchall()
+    for x in myresult:
+        print(x)
+
+getAllTable("customers_test")
