@@ -1,5 +1,6 @@
 import mysql.connector
-
+from datetime import datetime
+import os
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
@@ -13,30 +14,36 @@ mycursor = mydb.cursor()
 # ADD LOG FILE #
 ##############################
 
+def logEvent(log_info):
+    event_time = datetime.now()
+    with open("./NEA/db_log.txt", "a") as log:
+        log.write(f"|{event_time}| {log_info}\n")
+
 def getAllTable(table_name):
     sql = "SELECT * FROM %s" % (table_name)
     mycursor.execute(sql)
     myresult = mycursor.fetchall()
     for x in myresult:
-        print(x)
+        print(x) ########################################################
+    logEvent(f"Records from {table_name} accessed.")
 
 def deleteRecord(table_name, column, check_info):
     sql = "DELETE FROM %s WHERE %s = '%s'" % (table_name, column, check_info)
     mycursor.execute(sql)
     mydb.commit()
-    print(mycursor.rowcount, "record(s) deleted")
+    logEvent(f"{mycursor.rowcount}, record(s) deleted from {table_name}.")
 
 def updateRecord(table_name, column, check_info, new_info):
     sql = "UPDATE %(table)s SET %(column)s = '%(new)s' WHERE %(column)s = '%(check)s'" % {"column": column, "table": table_name, "new":new_info, "check":check_info}
     mycursor.execute(sql)
     mydb.commit()
-    print(mycursor.rowcount, "record(s) updated")
+    logEvent(f"{mycursor.rowcount}, record(s) updated in {table_name}.")
 
 def clearTable(table_name):
     sql = "DELETE FROM %s" % table_name
     mycursor.execute(sql)
     mydb.commit()
-    print(mycursor.rowcount, "record(s) deleted")
+    logEvent(f"All records in {table_name} deleted. {mycursor.rowcount}, record(s) deleted.")
 
 def addRecordToTable(table_name, info_dict):
     formatted_columns = ", ".join(info_dict.keys())
@@ -44,4 +51,4 @@ def addRecordToTable(table_name, info_dict):
     sql = f"INSERT INTO {table_name} ({formatted_columns}) VALUES ('{formatted_info}')"
     mycursor.execute(sql)
     mydb.commit()
-    print(mycursor.rowcount, "record(s) inserted.")
+    logEvent(f"{mycursor.rowcount}, record(s) inserted in {table_name}.")
