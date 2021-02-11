@@ -39,9 +39,9 @@ def clearTable(table_name):
     print(mycursor.rowcount, "record(s) deleted")
 
 def addRecordToTable(table_name, info_dict):
-    formatted_keys = ", ".join(info_dict.keys())
-    formatted_values = "', '".join(info_dict.values())
-    sql = f"INSERT INTO {table_name} ({formatted_keys}) VALUES ('{formatted_values}')"
+    formatted_columns = ", ".join(info_dict.keys())
+    formatted_info = "', '".join(info_dict.values())
+    sql = f"INSERT INTO {table_name} ({formatted_columns}) VALUES ('{formatted_info}')"
     mycursor.execute(sql)
     mydb.commit()
     print(mycursor.rowcount, "record(s) inserted.")
