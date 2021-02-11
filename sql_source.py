@@ -9,13 +9,9 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor()
 
-#mycursor.execute("CREATE TABLE customers_test (name VARCHAR(255), address VARCHAR(255))")
-
-sql = "INSERT INTO customers_test (name, address) VALUES (%s, %s)"
-val = ("John", "Highway 21")
-mycursor.execute(sql, val)
-mydb.commit()
-print(mycursor.rowcount, "record(s) inserted.")
+##############################
+# ADD LOG FILE #
+##############################
 
 def getAllTable(table_name):
     sql = "SELECT * FROM %s" % (table_name)
@@ -42,4 +38,10 @@ def clearTable(table_name):
     mydb.commit()
     print(mycursor.rowcount, "record(s) deleted")
 
-getAllTable("customers_test")
+def addRecordToTable(table_name, info_dict):
+    formatted_keys = ", ".join(info_dict.keys())
+    formatted_values = "', '".join(info_dict.values())
+    sql = f"INSERT INTO {table_name} ({formatted_keys}) VALUES ('{formatted_values}')"
+    mycursor.execute(sql)
+    mydb.commit()
+    print(mycursor.rowcount, "record(s) inserted.")
