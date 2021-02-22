@@ -36,7 +36,7 @@ def getAllTable(table_name):
     mycursor.execute(sql)
     result_values = mycursor.fetchall()
     for x in result_values:
-        print(x) ########################################################
+        print(x) ######################## Prints instead of returns ################################
     logEvent(f"Records from {table_name} accessed.")
 
 def  getAllTableDict(table_name):
