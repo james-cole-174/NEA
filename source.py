@@ -1,3 +1,3 @@
 import mysqlmodule as msm
 
-print(msm.getAllTableDict("customers"))
+msm.clearTable("customers")
