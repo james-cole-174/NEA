@@ -13,22 +13,13 @@ app = Flask(__name__)
 
 app.config['SECRET_KEY'] = '201def51bb6b28e0290a585c8eb778d6'
 
-posts = [
-    {
-        'author': 'James',
-        'title': 'Blog Post 1',
-        'content': 'First post content',
-        'date_posted': 'April 20, 2021'
-    },
-    {
-        'author': 'John Doe',
-        'title': 'Blog Post 2',
-        'content': 'Second post content',
-        'date_posted': 'April 21, 2022'
-    }
-]
+customers = msm.getAllTableDict
 
-print(msm.getAllTable("customers"))
+####################################################################################################
+#####                   Need to pull in all tables into here                                   #####
+#####                   Need to make pages and format those for displaying data                #####
+#####                   Need to make buttons to access functions                               #####
+####################################################################################################
 
 ####################################################################################################
 #####                   Decorator link to pages                                                #####
