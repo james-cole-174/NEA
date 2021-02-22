@@ -28,3 +28,4 @@ Database Log
 |2021-02-22 21:41:27.256440| Records from customers accessed.
 |2021-02-22 21:48:04.892154| Records from customers accessed.
 |2021-02-22 21:52:11.480213| Records from customers accessed.
+|2021-02-22 22:26:10.689018| All records in customers deleted. 2, record(s) deleted.
