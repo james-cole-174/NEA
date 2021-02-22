@@ -32,12 +32,32 @@ def logEvent(log_info):
 ####################################################################################################
 
 def getAllTable(table_name):
-    sql = "SELECT * FROM %s" % (table_name)
+    sql = f"SELECT * FROM {table_name}"
     mycursor.execute(sql)
-    myresult = mycursor.fetchall()
-    for x in myresult:
+    result_values = mycursor.fetchall()
+    for x in result_values:
         print(x) ########################################################
     logEvent(f"Records from {table_name} accessed.")
+
+def  getAllTableDict(table_name):
+    sql = f"SELECT * FROM {table_name}"
+    mycursor.execute(sql)
+    result_values = mycursor.fetchall()
+    sql = f"SHOW columns FROM {table_name}"
+    mycursor.execute(sql)
+    result_columns = mycursor.fetchall()
+    result_dictionary = {}
+    column_names = ()
+    values = ()
+    dictionaries = []
+    for i in result_columns:
+        column_names += (i[0],)
+    for i in result_values:
+        for j in range(len(i)):
+            result_dictionary[column_names[j]] = i[j]
+        dictionaries.append(result_dictionary.copy())
+    logEvent(f"Records from {table_name} accessed.")
+    return dictionaries
 
 def deleteRecord(table_name, column, check_info):
     sql = "DELETE FROM %s WHERE %s = '%s'" % (table_name, column, check_info)
