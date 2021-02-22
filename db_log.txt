@@ -4,3 +4,10 @@ Database Log
 |2021-02-11 21:30:52.319936| All records in customers_test deleted. 2, record(s) deleted.
 |2021-02-11 21:33:46.870052| Records from customers_test accessed.
 |2021-02-11 22:29:23.369941| Records from customers accessed.
+|2021-02-22 17:11:41.808930| Records from customers accessed.
+|2021-02-22 17:11:47.444458| Records from customers accessed.
+|2021-02-22 17:17:18.479862| 1, record(s) inserted in customers.
+|2021-02-22 17:17:18.480854| Records from customers accessed.
+|2021-02-22 17:17:45.095478| 1, record(s) inserted in customers.
+|2021-02-22 17:17:45.096470| Records from customers accessed.
+|2021-02-22 17:19:13.800732| Records from customers accessed.
