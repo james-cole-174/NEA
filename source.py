@@ -1,3 +1,3 @@
 import mysqlmodule as msm
 
-msm.getAllTable("customers")
+print(msm.getAllTableDict("customers"))
