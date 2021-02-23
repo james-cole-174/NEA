@@ -13,10 +13,23 @@ app = Flask(__name__)
 
 app.config['SECRET_KEY'] = '201def51bb6b28e0290a585c8eb778d6'
 
-customers = msm.getAllTableDict
+posts = [
+    {
+        'author': 'Corey Schafer',
+        'title': 'Blog Post 1',
+        'content': 'First post content',
+        'date_posted': 'April 20, 2018'
+    },
+    {
+        'author': 'Jane Doe',
+        'title': 'Blog Post 2',
+        'content': 'Second post content',
+        'date_posted': 'April 21, 2018'
+    }
+]
+
 
 ####################################################################################################
-#####                   Need to pull in all tables into here                                   #####
 #####                   Need to make pages and format those for displaying data                #####
 #####                   Need to make buttons to access functions                               #####
 ####################################################################################################
@@ -34,10 +47,27 @@ def home():
 def about():
     return render_template('about.html', title='About')
 
+@app.route('/customers')
+def customers_page():
+    customers = msm.getAllTableDict("customers")
+    shipping_address = msm.getAllTableDict("shipping_address")
+    return render_template('customers_page.html', customers=customers)
+
+@app.route('/orders')
+def orders_page():
+    orders = msm.getAllTableDict("orders")
+    order_lines = msm.getAllTableDict("order_lines")
+    return render_template('orders_page.html', orders=orders)
+
+@app.route('/products')
+def products_page():
+    products = msm.getAllTableDict("products")
+    return render_template('products_page.html', products=products)
+
 ####################################################################################################
 #####                   Auto run site - MOVE                                                   #####
 ####################################################################################################
 
 # Auto run site in website if run from this module
-#if __name__ == '__main__':
-#    app.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=True)
