@@ -70,3 +70,20 @@ Database Log
 |2021-02-23 10:25:12.077112| 1, record(s) inserted in products.
 |2021-02-23 10:27:52.398923| Records from products accessed.
 |2021-02-23 10:30:38.444260| Records from products accessed.
+|2021-02-23 10:35:42.690897| 1, record(s) inserted in products.
+|2021-02-23 10:36:46.638661| Records from products accessed.
+|2021-02-23 10:37:14.711534| Records from products accessed.
+|2021-02-23 10:49:20.196130| 1, record(s) inserted in products.
+|2021-02-23 10:54:46.465918| Records from products accessed.
+|2021-02-23 10:54:48.348007| Records from products accessed.
+|2021-02-23 10:54:49.997258| Records from products accessed.
+|2021-02-23 11:01:11.617004| 1, record(s) inserted in products.
+|2021-02-23 11:01:19.634083| Records from products accessed.
+|2021-02-23 11:01:21.914972| Records from products accessed.
+|2021-02-23 11:11:04.464868| Records from products accessed.
+|2021-02-23 11:12:48.748188| 1, record(s) deleted from products.
+|2021-02-23 11:12:48.753168| 1, record(s) deleted from products.
+|2021-02-23 11:12:48.758631| 1, record(s) deleted from products.
+|2021-02-23 11:12:48.761608| 1, record(s) deleted from products.
+|2021-02-23 11:12:48.764061| 1, record(s) deleted from products.
+|2021-02-23 11:13:02.215450| Records from products accessed.
