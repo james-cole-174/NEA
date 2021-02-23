@@ -60,19 +60,19 @@ def  getAllTableDict(table_name):
     return dictionaries
 
 def deleteRecord(table_name, column, check_info):
-    sql = "DELETE FROM %s WHERE %s = '%s'" % (table_name, column, check_info)
+    sql = f"DELETE FROM {table_name} WHERE {column} = '{check_info}'"
     mycursor.execute(sql)
     mydb.commit()
     logEvent(f"{mycursor.rowcount}, record(s) deleted from {table_name}.")
 
 def updateRecord(table_name, column, check_info, new_info):
-    sql = "UPDATE %(table)s SET %(column)s = '%(new)s' WHERE %(column)s = '%(check)s'" % {"column": column, "table": table_name, "new":new_info, "check":check_info}
+    sql = f"UPDATE {table_name} SET {column} = '{new_info}' WHERE {column} = '{check_info}'"
     mycursor.execute(sql)
     mydb.commit()
     logEvent(f"{mycursor.rowcount}, record(s) updated in {table_name}.")
 
 def clearTable(table_name):
-    sql = "DELETE FROM %s" % table_name
+    sql = f"DELETE FROM {table_name}"
     mycursor.execute(sql)
     mydb.commit()
     logEvent(f"All records in {table_name} deleted. {mycursor.rowcount}, record(s) deleted.")
