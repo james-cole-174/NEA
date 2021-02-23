@@ -56,3 +56,17 @@ Database Log
 |2021-02-23 09:49:37.773772| Records from orders accessed.
 |2021-02-23 09:49:37.775260| Records from products accessed.
 |2021-02-23 09:49:37.776252| Records from shipping_address accessed.
+|2021-02-23 10:02:17.861179| 1, record(s) inserted in products.
+|2021-02-23 10:02:19.932755| 1, record(s) inserted in products.
+|2021-02-23 10:02:34.915258| Records from products accessed.
+|2021-02-23 10:03:35.382707| 2, record(s) deleted from products.
+|2021-02-23 10:03:37.485537| 0, record(s) deleted from products.
+|2021-02-23 10:03:53.823477| Records from products accessed.
+|2021-02-23 10:04:14.666115| 1, record(s) inserted in products.
+|2021-02-23 10:04:22.448947| Records from products accessed.
+|2021-02-23 10:19:05.805692| 1, record(s) inserted in products.
+|2021-02-23 10:19:18.717069| Records from products accessed.
+|2021-02-23 10:21:23.409011| Records from products accessed.
+|2021-02-23 10:25:12.077112| 1, record(s) inserted in products.
+|2021-02-23 10:27:52.398923| Records from products accessed.
+|2021-02-23 10:30:38.444260| Records from products accessed.
