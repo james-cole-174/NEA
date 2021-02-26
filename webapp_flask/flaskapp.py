@@ -57,18 +57,18 @@ def about():
 def customers_page():
     customers = msm.getAllTableDict("customers")
     shipping_address = msm.getAllTableDict("shipping_address")
-    return render_template('customers_page.html', customers=customers)
+    return render_template('customers_page.html', customers=customers, title='Customers')
 
 @app.route('/orders')
 def orders_page():
     orders = msm.getAllTableDict("orders")
     order_lines = msm.getAllTableDict("order_lines")
-    return render_template('orders_page.html', orders=orders)
+    return render_template('orders_page.html', orders=orders, order_lines=order_lines)
 
 @app.route('/products')
 def products_page():
     products = msm.getAllTableDict("products")
-    return render_template('products_page.html', products=products)
+    return render_template('products_page.html', products=products, title='Products')
 
 ####################################################################################################
 #####                   Auto run site - MOVE                                                   #####
