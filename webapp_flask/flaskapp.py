@@ -34,6 +34,7 @@ posts = [
     }
 ]
 
+count = (1,2,3)
 
 ####################################################################################################
 #####                   Need to make pages and format those for displaying data                #####
@@ -68,7 +69,7 @@ def orders_page():
 @app.route('/products')
 def products_page():
     products = msm.getAllTableDict("products")
-    return render_template('products_page.html', products=products, title='Products')
+    return render_template('products_page.html', products=products, three=count, title='Products')
 
 ####################################################################################################
 #####                   Auto run site - MOVE                                                   #####
