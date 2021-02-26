@@ -1,4 +1,19 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>Customer Page</h1>
+    <h1>Customers</h1>
+    <div class="grid-container">
+        {% for customer in customers %}
+        <div>
+            <article class="media content-section">
+                <div class="grid-container">
+                    <div class="article-metadata">
+                        <h2><a class="article-title" href="#">{{ customer.title }} {{ customer.first_name }} {{ customer.last_name }} </a></h2>
+                    </div>
+                    <p class="article-content">E-mail: {{ customer.email }}</p>
+                    <p class="article-content">Tel: {{ customer.phone }}</p>
+                </div>
+            </article>
+        </div>
+        {% endfor %}
+    </div>
 {% endblock content %}
