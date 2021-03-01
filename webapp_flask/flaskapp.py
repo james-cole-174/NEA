@@ -54,19 +54,19 @@ def home():
 def about():
     return render_template('about.html', title='About')
 
-@app.route('/customers')
+@app.route('/customer')
 def customers_page():
     customers = msm.getAllTableDict("customers")
     shipping_address = msm.getAllTableDict("shipping_address")
     return render_template('customers_page.html', customers=customers, title='Customers')
 
-@app.route('/orders')
+@app.route('/order')
 def orders_page():
     orders = msm.getAllTableDict("orders")
     order_lines = msm.getAllTableDict("order_lines")
     return render_template('orders_page.html', orders=orders, order_lines=order_lines)
 
-@app.route('/products')
+@app.route('/product')
 def products_page():
     products = msm.getAllTableDict("products")
     return render_template('products_page.html', products=products, three=count, title='Products')
