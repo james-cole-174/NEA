@@ -7,7 +7,7 @@ Inventory and Sales Order management system
 james-cole-174
 
 # How to run
-Project runs from the
+Project runs from the file:
 ```
 ./webapp_flask/flaskapp.py
 ```
@@ -15,5 +15,5 @@ Required modules:
 
   - Python:
   
-    - flask
-    - mysql
+    - [flask](https://flask.palletsprojects.com/en/1.1.x/) - used for the webpage
+    - [mysql connector](https://dev.mysql.com/doc/connector-python/en/) - used to connect to the database
