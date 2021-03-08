@@ -1,4 +1,5 @@
 Database Log
+
 |2021-02-11 18:06:35.211154| Records from customers_test accessed.
 |2021-02-11 21:30:34.233520| Records from customers_test accessed.
 |2021-02-11 21:30:52.319936| All records in customers_test deleted. 2, record(s) deleted.
