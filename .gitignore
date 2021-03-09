@@ -1,3 +1,4 @@
 test.py
 __pycache__/
 webapp_flask/__pycache__/
+.vscode/
