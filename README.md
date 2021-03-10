@@ -5,6 +5,7 @@ Inventory and Sales Order management system
 
 # Authors
 [james-cole-174](https://github.com/james-cole-174)
+[harv-bala](https://github.com/harv-bala)
 
 # How to run
 Project runs from the file:
