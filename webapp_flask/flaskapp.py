@@ -19,23 +19,6 @@ app = Flask(__name__)
 
 app.config['SECRET_KEY'] = '201def51bb6b28e0290a585c8eb778d6'
 
-posts = [
-    {
-        'author': 'Corey Schafer',
-        'title': 'Blog Post 1',
-        'content': 'First post content',
-        'date_posted': 'April 20, 2018'
-    },
-    {
-        'author': 'Jane Doe',
-        'title': 'Blog Post 2',
-        'content': 'Second post content',
-        'date_posted': 'April 21, 2018'
-    }
-]
-
-count = (1,2,3)
-
 ####################################################################################################
 #####                   Need to make pages and format those for displaying data                #####
 #####                   Need to make buttons to access functions                               #####
@@ -48,11 +31,7 @@ count = (1,2,3)
 @app.route('/')
 @app.route('/home')
 def home():
-    return render_template('home.html', posts=posts)
-
-@app.route('/about')
-def about():
-    return render_template('about.html', title='About')
+    return render_template('home.html')
 
 @app.route('/customer')
 def customers_page():
@@ -69,7 +48,7 @@ def orders_page():
 @app.route('/product')
 def products_page():
     products = msm.getAllTableDict("products")
-    return render_template('products_page.html', products=products, three=count, title='Products')
+    return render_template('products_page.html', products=products, title='Products')
 
 ####################################################################################################
 #####                   Auto run site - MOVE                                                   #####
