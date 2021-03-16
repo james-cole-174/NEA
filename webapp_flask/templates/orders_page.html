@@ -1,19 +1,19 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>Customers</h1>
-    <div class="container-fluid">
-        {% for customer in customers %}
-        <div class="col-md-4">
+    <h1>Orders</h1>
+        {% for order in orders %}
             <article class="media content-section">
-                <div class="grid-container">
+                <div class="media-body">
                     <div class="article-metadata">
-                        <h2><a class="article-title" href="#">{{ customer.title }} {{ customer.first_name }} {{ customer.last_name }} </a></h2>
+                        <h2><a class="article-title" href="#">{{ order.order_id }}</a></h2>
+                        <small class="text-muted">Shipping: £{{ order.shipping_amount }}</small>
+                        <small class="text-muted">Items: £{{ order.price_amount }}</small>
+                        <small class="text-muted">Subtotal: £{{ order.order_subtotal }}</small>
                     </div>
-                    <p class="article-content">E-mail: {{ customer.email }}</p>
-                    <p class="article-content">Tel: {{ customer.phone }}</p>
+                    <p class="article-content">Date: {{ order.order_date }}</p>
+                    <p class="article-content">Status: {{ order.order_status }}</p>
+                    <p class="article-content">Shipping Method: {{ order.shipping_method }}</p>
                 </div>
             </article>
-        </div>
         {% endfor %}
-    </div>
 {% endblock content %}
