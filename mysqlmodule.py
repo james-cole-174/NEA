@@ -39,7 +39,7 @@ def getAllTable(table_name):
         print(x) ######################## Prints instead of returns ################################
     logEvent(f"Records from {table_name} accessed.")
 
-def  getAllTableDict(table_name):
+def getAllTableDict(table_name):
     sql = f"SELECT * FROM {table_name}"
     mycursor.execute(sql)
     result_values = mycursor.fetchall()
