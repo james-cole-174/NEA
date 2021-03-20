@@ -31,15 +31,23 @@ def logEvent(log_info):
 #####                   Database I/O                                                           #####
 ####################################################################################################
 
-def getAllTable(table_name):
+def getAllTableArray_Print(table_name):
     sql = f"SELECT * FROM {table_name}"
     mycursor.execute(sql)
     result_values = mycursor.fetchall()
     for x in result_values:
-        print(x) ######################## Prints instead of returns ################################
+        print(x) 
     logEvent(f"Records from {table_name} accessed.")
 
-def getAllTableDict(table_name):
+def getAllTableArray_Return(table_name):
+    sql = f"SELECT * FROM {table_name}"
+    mycursor.execute(sql)
+    result_values = mycursor.fetchall()
+    logEvent(f"Records from {table_name} accessed.")
+    for x in result_values:
+        return x 
+
+def getAllTableDictionary(table_name):
     sql = f"SELECT * FROM {table_name}"
     mycursor.execute(sql)
     result_values = mycursor.fetchall()

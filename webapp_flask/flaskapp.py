@@ -42,8 +42,8 @@ def customers_page():
     search = SearchForm(request.form)
     if request.method == 'POST':
         return search_results(search)
-    customers = msm.getAllTableDict("customers")
-    shipping_address = msm.getAllTableDict("shipping_address")
+    customers = msm.getAllTableDictionary("customers")
+    shipping_address = msm.getAllTableDictionary("shipping_address")
     return render_template('customers_page.html', customers=customers, title='Customers')
 
 @app.route('/order', methods = ['GET', 'POST'])
@@ -51,8 +51,8 @@ def orders_page():
     search = SearchForm(request.form)
     if request.method == 'POST':
         return search_results(search)
-    orders = msm.getAllTableDict("orders")
-    order_lines = msm.getAllTableDict("order_lines")
+    orders = msm.getAllTableDictionary("orders")
+    order_lines = msm.getAllTableDictionary("order_lines")
     return render_template('orders_page.html', orders=orders, order_lines=order_lines)
 
 @app.route('/product', methods = ['GET', 'POST'])
@@ -60,7 +60,7 @@ def products_page():
     search = SearchForm(request.form)
     if request.method == 'POST':
         return search_results(search)
-    products = msm.getAllTableDict("products")
+    products = msm.getAllTableDictionary("products")
     # need to add formatting to make the products into rows then submit them to the page
     # also need to add jinja formatting to the page to take each row and show it
     return render_template('products_page.html', products=products, title='Products', form=search)
