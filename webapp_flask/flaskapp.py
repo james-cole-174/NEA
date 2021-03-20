@@ -24,6 +24,9 @@ app.config['SECRET_KEY'] = '201def51bb6b28e0290a585c8eb778d6'
 #####                   Need to make pages and format those for displaying data (part complete)#####
 #####                   Need to make buttons to access functions                               #####
 #####                   Need to add search bars                                                #####
+#####                   - added search forms                                                   #####
+#####                   - need to integrate into html                                          #####
+#####                   - need to show results in page                                         #####
 ####################################################################################################
 
 ####################################################################################################
@@ -59,8 +62,8 @@ def products_page():
     if request.method == 'POST':
         return search_results(search)
     products = msm.getAllTableDict("products")
-    #need to add formatting to make the products into rows then submit them to the page
-    #also need to add jinja formatting to the page to take each row and show it
+    # need to add formatting to make the products into rows then submit them to the page
+    # also need to add jinja formatting to the page to take each row and show it
     return render_template('products_page.html', products=products, title='Products', form=search)
 
 ####################################################################################################
