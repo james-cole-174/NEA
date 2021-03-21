@@ -19,7 +19,7 @@ import mysqlmodule as msm
 
 def chunks(data, SIZE=10000):
     it = iter(data)
-    for i in xrange(0, len(data), SIZE):
+    for i in range(0, len(data), SIZE):
         yield {k:data[k] for k in islice(it, SIZE)}
 
 ####################################################################################################
@@ -74,6 +74,15 @@ def products_page():
     products_len = len(products)
     products_row = ()
     if products_len // 3 == 0:
+        for row in chunks(products, 3): # stolen from internet
+            products_row = products_row + row
+    elif products_len // 3 == 1:
+        products.append("null_1")
+        products.append("null_2")
+        for row in chunks(products, 3): # stolen from internet
+            products_row = products_row + row
+    elif products_len // 3 == 2:
+        products.append("null_1")
         for row in chunks(products, 3): # stolen from internet
             products_row = products_row + row
     # need to add formatting to make the products into rows then submit them to the page
