@@ -14,15 +14,6 @@ from flask import Flask, escape, request, render_template, url_for
 import mysqlmodule as msm
 
 ####################################################################################################
-#####                   Stolen function from internet                                          #####
-####################################################################################################
-
-def chunks(data, SIZE=10000):
-    it = iter(data)
-    for i in range(0, len(data), SIZE):
-        yield {k:data[k] for k in islice(it, SIZE)}
-
-####################################################################################################
 #####                   Flask setup                                                            #####
 ####################################################################################################
 
@@ -72,22 +63,18 @@ def products_page():
         return search_results(search)
     products = msm.getAllTableDictionary("products")
     products_len = len(products)
-    products_row = ()
     if products_len // 3 == 0:
-        for row in chunks(products, 3): # stolen from internet
-            products_row = products_row + row
+        product_rows = [products[x:x+3] for x in range(0, products_len, 3)]
     elif products_len // 3 == 1:
-        products.append("null_1")
-        products.append("null_2")
-        for row in chunks(products, 3): # stolen from internet
-            products_row = products_row + row
+        products.append(0)
+        products.append(0)
+        product_rows = [products[x:x+3] for x in range(0, products_len, 3)]
     elif products_len // 3 == 2:
-        products.append("null_1")
-        for row in chunks(products, 3): # stolen from internet
-            products_row = products_row + row
+        products.append(0)
+        product_rows = [products[x:x+3] for x in range(0, products_len, 3)]
     # need to add formatting to make the products into rows then submit them to the page
     # also need to add jinja formatting to the page to take each row and show it
-    return render_template('products_page.html', rows=products_row, title='Products', form=search)
+    return render_template('products_page.html', rows=product_rows, title='Products', form=search)
 
 ####################################################################################################
 #####                   Auto run site                                                          #####
