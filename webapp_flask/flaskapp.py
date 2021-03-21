@@ -8,7 +8,6 @@ current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentfra
 parent_dir = os.path.dirname(current_dir)
 sys.path.insert(0, parent_dir)
 
-from itertools import islice
 from forms import SearchForm
 from flask import Flask, escape, request, render_template, url_for 
 import mysqlmodule as msm
@@ -56,7 +55,7 @@ def orders_page():
     order_lines = msm.getAllTableDictionary("order_lines")
     return render_template('orders_page.html', orders=orders, order_lines=order_lines)
 
-@app.route('/product', methods = ['GET', 'POST']) #page not working
+@app.route('/product', methods = ['GET', 'POST']) 
 def products_page():
     search = SearchForm(request.form)
     if request.method == 'POST':
@@ -66,14 +65,13 @@ def products_page():
     if products_len // 3 == 0:
         product_rows = [products[x:x+3] for x in range(0, products_len, 3)]
     elif products_len // 3 == 1:
-        products.append(0)
+        products.append(0) #need way to not show blanks
         products.append(0)
         product_rows = [products[x:x+3] for x in range(0, products_len, 3)]
     elif products_len // 3 == 2:
         products.append(0)
         product_rows = [products[x:x+3] for x in range(0, products_len, 3)]
     # need to add formatting to make the products into rows then submit them to the page
-    # also need to add jinja formatting to the page to take each row and show it
     return render_template('products_page.html', rows=product_rows, title='Products', form=search)
 
 ####################################################################################################
