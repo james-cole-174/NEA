@@ -41,18 +41,28 @@
                 </div>
             </div>
             <div class="col-md-9">
-                {% for product in products %}
-                    <article class="media content-section">
-                        <div class="media-body">
-                            <div class="article-metadata">
-                                <h2><a class="article-title" href="#">{{ product.product_name }}</a></h2>
-                                <small class="text-muted">£{{ product.unit_price }}</small>
+                {% for row in rows %}
+                    <div class="row">
+                        {% for product in row %}
+                            <div class="col">
+                                <article class="media content-section">
+                                    <div class="media-body">
+                                        <div class="article-metadata">
+                                            <h2><a class="article-title" href="#">{{ product.product_name }}</a></h2>
+                                            <small class="text-muted">£{{ product.unit_price }}</small>
+                                        </div>
+                                        <p class="article-content">{{ product.product_description }}</p>
+                                        <p class="article-content">Weight: {{ product.product_weight }}kg</p>
+                                    </div>
+                                </article>
                             </div>
-                            <p class="article-content">{{ product.product_description }}</p>
-                            <p class="article-content">Weight: {{ product.product_weight }}kg</p>
-                        </div>
-                    </article>
+                        {% endfor %}
+                    </div>
                 {% endfor %}
             </div>
         </div>
 {% endblock content %}
+
+<!--
+    not working - doesnt display any products
+-->
