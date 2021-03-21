@@ -1,16 +1,58 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>Products</h1>
-        {% for product in products %}
-            <article class="media content-section">
-                <div class="media-body">
-                    <div class="article-metadata">
-                        <h2><a class="article-title" href="#">{{ product.product_name }}</a></h2>
-                        <small class="text-muted">£{{ product.unit_price }}</small>
-                    </div>
-                    <p class="article-content">{{ product.product_description }}</p>
-                    <p class="article-content">Weight: {{ product.product_weight }}kg</p>
+    <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col">
+            <h1>Products</h1>
+        </div>
+    </div>
+        <div class="row">   
+            <div class="col-md-3">
+                <div class="content-section">
+                    <form>
+                        <h3>Filters</h3>
+                        <div class="mb-3">
+                            <label for="searchBar" class="form-label">Search</label>
+                            <input type="text" class="form-control" id="searchBar" placeholder="Enter product name">
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="sampleCheck1">
+                            <label class="form-check-label" for="sampleCheck1">
+                                Test Checkbox 1
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="sampleCheck2">
+                            <label class="form-check-label" for="sampleCheck2">
+                                Test Checkbox 2
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="sampleCheck3">
+                            <label class="form-check-label" for="sampleCheck3">
+                                Test Checkbox 3
+                            </label>
+                        </div>
+                        <div class="mt-2">
+                            <button type="search" class="btn btn-primary">Search</button>
+                        </div>
+                    </form>
                 </div>
-            </article>
-        {% endfor %}
+            </div>
+            <div class="col-md-9">
+                {% for product in products %}
+                    <article class="media content-section">
+                        <div class="media-body">
+                            <div class="article-metadata">
+                                <h2><a class="article-title" href="#">{{ product.product_name }}</a></h2>
+                                <small class="text-muted">£{{ product.unit_price }}</small>
+                            </div>
+                            <p class="article-content">{{ product.product_description }}</p>
+                            <p class="article-content">Weight: {{ product.product_weight }}kg</p>
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+        </div>
 {% endblock content %}
