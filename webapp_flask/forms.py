@@ -28,5 +28,5 @@ from wtforms.validators import DataRequired, Length, Email, EqualTo
 #        submit = SubmitField('Login')
 
 class SearchForm(FlaskForm):
-    search = StringField('')
-    submit = SubmitField('Search')
+    search = StringField('Search')
+    submit = SubmitField('Enter search')
