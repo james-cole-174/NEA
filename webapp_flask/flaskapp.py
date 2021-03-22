@@ -59,8 +59,10 @@ def orders_page():
 def products_page():
     search = SearchForm(request.form)
     if request.method == 'POST':
-        print(search.data) # search.data contains the search query
-    products = msm.getAllTableDictionary("products")
+        products = msm.searchTable("products", "product_name", search.data["search"])
+        # row formatting doesnt currently work as rows of 3 with search data
+    else:
+        products = msm.getAllTableDictionary("products")
     products_len = len(products)
     product_rows = []
     if products_len // 3 == 1:
@@ -70,7 +72,6 @@ def products_page():
         products.append(0)
     for i in range(0, products_len, 3):
             product_rows.append(products[i:i+3])
-    # need to add formatting to make the products into rows then submit them to the page
     return render_template('products_page.html', rows=product_rows, title='Products', form=search)
 
 ####################################################################################################
