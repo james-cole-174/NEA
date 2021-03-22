@@ -63,14 +63,20 @@ def products_page():
     products = msm.getAllTableDictionary("products")
     products_len = len(products)
     if products_len // 3 == 0:
-        product_rows = [products[x:x+3] for x in range(0, products_len, 3)]
+        for i in range(0, products_len, 3):
+            product_rows.append(products[x:x+3])
+        #product_rows = [products[x:x+3] for x in range(0, products_len, 3)]
     elif products_len // 3 == 1:
         products.append(0) #need way to not show blanks
         products.append(0)
-        product_rows = [products[x:x+3] for x in range(0, products_len, 3)]
+        for i in range(0, products_len, 3):
+            product_rows.append(products[x:x+3])
+        #product_rows = [products[x:x+3] for x in range(0, products_len, 3)]
     elif products_len // 3 == 2:
         products.append(0)
-        product_rows = [products[x:x+3] for x in range(0, products_len, 3)]
+        for i in range(0, products_len, 3):
+            product_rows.append(products[x:x+3])
+        #product_rows = [products[x:x+3] for x in range(0, products_len, 3)]
     # need to add formatting to make the products into rows then submit them to the page
     return render_template('products_page.html', rows=product_rows, title='Products', form=search)
 
