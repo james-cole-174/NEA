@@ -59,7 +59,7 @@ def orders_page():
 def products_page():
     search = SearchForm(request.form)
     if request.method == 'POST':
-        return search_results(search)
+        print(search.data) # search.data contains the search query
     products = msm.getAllTableDictionary("products")
     products_len = len(products)
     product_rows = []
