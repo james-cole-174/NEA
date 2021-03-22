@@ -44,19 +44,38 @@
             <!-- Main content --> 
             <div class="col-md-9">
                 {% for row in rows %}
-                    <div class="row">
+                    <div class="card-deck">
                         {% for product in row %}
-                            <div class="col">
-                                <article class="media content-section">
-                                    <div class="media-body">
-                                        <div class="article-metadata">
-                                            <h4><a class="article-title" href="#">{{ product.product_name }}</a></h4>
-                                            <small class="text-muted">£{{ product.unit_price }}</small>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ product.product_name }}</h5>
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#productDetails{{ product.product_name }}">
+                                        More
+                                    </button>
+                                    <!-- Modal -->
+                                    <div class="modal" id="productDetails{{ product.product_name }}" tabindex="-1" role="dialog" aria-labelledby="moreDetails" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title" id="exampleModalLabel">{{ product.product_name }}</h4>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <small class="text-muted">£{{ product.unit_price }}</small>
+                                                    <p>{{ product.product_description }}</p>
+                                                    <p>{{ product.product_weight }} kg</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <p class="article-content">{{ product.product_description }}</p>
-                                        <p class="article-content">Weight: {{ product.product_weight }}kg</p>
                                     </div>
-                                </article>
+                                </div>
+                                <div class="card-footer">Quantity: {{ product.quantity }}</div>
                             </div>
                         {% endfor %}
                     </div>
