@@ -47,8 +47,10 @@
                     <div class="card-deck">
                         {% for product in row %}
                             <div class="card">
-                                <div class="card-body">
+                                <div class="card-header">
                                     <h5 class="card-title">{{ product.product_name }}</h5>
+                                </div>
+                                <div class="card-body">
                                     <!-- Button trigger modal -->
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#productDetails{{ product.product_name }}">
                                         More
