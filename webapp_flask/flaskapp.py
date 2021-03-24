@@ -58,21 +58,23 @@ def orders_page():
 @app.route('/product', methods = ['GET', 'POST']) 
 def products_page():
     search = SearchForm(request.form)
+    results = True
     if request.method == 'POST':
         products = msm.searchTable("products", "product_name", search.data["search"])
-        # row formatting doesnt currently work as rows of 3 with search data
     else:
         products = msm.getAllTableDictionary("products")
     products_len = len(products)
+    if products_len == 0:
+        results = False
     product_rows = []
-    if products_len // 3 == 1:
+    if products_len % 3 == 1:
         products.append(0) #need way to not show blanks
         products.append(0)
-    elif products_len // 3 == 2:
+    elif products_len % 3 == 2:
         products.append(0)
     for i in range(0, products_len, 3):
             product_rows.append(products[i:i+3])
-    return render_template('products_page.html', rows=product_rows, title='Products', form=search)
+    return render_template('products_page.html', rows=product_rows, title='Products', form=search, results=results)
 
 ####################################################################################################
 #####                   Auto run site                                                          #####
