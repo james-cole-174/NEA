@@ -50,24 +50,8 @@ def getAllTableArray_Return(table_name):
 def getAllTableDictionary(table_name):
     sql = f"SELECT * FROM {table_name}"
     mycursor.execute(sql)
-    result_values = mycursor.fetchall()
-    sql = f"SHOW columns FROM {table_name}"
-    mycursor.execute(sql)
-    result_columns = mycursor.fetchall()
-    result_dictionary = {}
-    column_names = ()
-    values = ()
-    dictionaries = []
-    for i in result_columns:
-        column_names += (i[0],)
-    for i in result_values:
-        for j in range(len(i)):
-            result_dictionary[column_names[j]] = i[j]
-        dictionaries.append(result_dictionary.copy())
-    logEvent(f"Records from {table_name} accessed.")
-    return dictionaries
+    return getRecordsAsDictionary(table_name, mycursor.fetchall())
 
-'''
 def getRecordsAsDictionary(table_name, records):
     sql = f"SHOW columns FROM {table_name}"
     mycursor.execute(sql)
@@ -84,7 +68,7 @@ def getRecordsAsDictionary(table_name, records):
         dictionaries.append(result_dictionary.copy())
     logEvent(f"Records from {table_name} accessed.")
     return dictionaries
-'''
+
 ######### i think i can combine a lot of excess code with this ^
 
 def deleteRecord(table_name, column, check_info):
@@ -116,19 +100,4 @@ def addRecordToTable(table_name, info_dict):
 def searchTable(table_name, search_column, search_term):
     sql = f"SELECT * FROM {table_name} WHERE {search_column} LIKE '%{search_term}%'"
     mycursor.execute(sql)
-    result_values = mycursor.fetchall()
-    sql = f"SHOW columns FROM {table_name}"
-    mycursor.execute(sql)
-    result_columns = mycursor.fetchall()
-    result_dictionary = {}
-    column_names = ()
-    values = ()
-    dictionaries = []
-    for i in result_columns:
-        column_names += (i[0],)
-    for i in result_values:
-        for j in range(len(i)):
-            result_dictionary[column_names[j]] = i[j]
-        dictionaries.append(result_dictionary.copy())
-    logEvent(f"Records from {table_name} searched.")
-    return dictionaries
+    return getRecordsAsDictionary(table_name, mycursor.fetchall())
