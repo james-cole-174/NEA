@@ -37,6 +37,7 @@
                             </label>
                         </div>
                         -->
+                        <button type="button" class="btn btn-link">Reset</button>
                         <div class="mt-2">
                             <button type="submit" class="btn btn-primary">Search</button>
                         </div>
@@ -44,47 +45,51 @@
                     </form>
                 </div>
             </div>
-            <!-- Main content --> 
-            <div class="col-md-9">
-                {% for row in rows %}
-                    <div class="card-deck">
-                        {% for product in row %}
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="card-title">{{ product.product_name }}</h5>
-                                </div>
-                                <div class="card-body">
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#productDetails{{ product.product_name }}">
-                                        More
-                                    </button>
-                                    <!-- Modal -->
-                                    <div class="modal" id="productDetails{{ product.product_name }}" tabindex="-1" role="dialog" aria-labelledby="moreDetails" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h4 class="modal-title" id="exampleModalLabel">{{ product.product_name }}</h4>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <small class="text-muted">£{{ product.unit_price }}</small>
-                                                    <p>{{ product.product_description }}</p>
-                                                    <p>{{ product.product_weight }} kg</p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <!-- Main content -->
+            {% if results %} 
+                <div class="col-md-9">
+                    {% for row in rows %}
+                        <div class="card-deck">
+                            {% for product in row %}
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title">{{ product.product_name }}</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#productDetails{{ product.product_name }}">
+                                            More
+                                        </button>
+                                        <!-- Modal -->
+                                        <div class="modal" id="productDetails{{ product.product_name }}" tabindex="-1" role="dialog" aria-labelledby="moreDetails" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title" id="exampleModalLabel">{{ product.product_name }}</h4>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <small class="text-muted">£{{ product.unit_price }}</small>
+                                                        <p>{{ product.product_description }}</p>
+                                                        <p>{{ product.product_weight }} kg</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="card-footer">Quantity: {{ product.quantity }}</div>
                                 </div>
-                                <div class="card-footer">Quantity: {{ product.quantity }}</div>
-                            </div>
-                        {% endfor %}
-                    </div>
-                {% endfor %}
-            </div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <h3>No results</h3>
+            {% endif %}
         </div>
 {% endblock content %}
