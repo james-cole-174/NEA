@@ -8,7 +8,7 @@ current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentfra
 parent_dir = os.path.dirname(current_dir)
 sys.path.insert(0, parent_dir)
 
-from forms import SearchForm
+from forms import ProductSearchForm
 from flask import Flask, escape, request, render_template, url_for 
 import mysqlmodule as msm
 
@@ -57,7 +57,7 @@ def orders_page():
 
 @app.route('/product', methods = ['GET', 'POST']) 
 def products_page():
-    search = SearchForm(request.form)
+    search = ProductSearchForm(request.form)
     results = True
     if request.method == 'POST':
         products = msm.searchTable("products", "product_name", search.data["search"])
