@@ -9,6 +9,7 @@ from datetime import datetime
 #####                   Database connection                                                    #####
 ####################################################################################################
 
+# PC
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
@@ -16,6 +17,15 @@ mydb = mysql.connector.connect(
     database="mydatabase"
 )
 
+# LAPTOP
+'''
+mydb = mysql.connector.connect(
+    host="localhost",
+    user="admin",
+    password="admin",
+    database="MYSQL"
+)
+'''
 mycursor = mydb.cursor()
 
 ####################################################################################################
