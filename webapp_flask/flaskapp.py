@@ -21,11 +21,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = '201def51bb6b28e0290a585c8eb778d6'
 
 ####################################################################################################
-#####                   Need to make pages and format those for displaying data (part complete)#####
 #####                   Need to make buttons to access functions                               #####
-#####                   Need to add search bars                                                #####
-#####                   - need to integrate into html                                          #####
-#####                   - need to show results in page                                         #####
 ####################################################################################################
 
 ####################################################################################################
