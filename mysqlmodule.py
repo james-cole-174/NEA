@@ -41,6 +41,7 @@ def logEvent(log_info):
 #####                   Database I/O                                                           #####
 ####################################################################################################
 
+# defunct
 def getAllTableArray_Print(table_name):
     sql = f"SELECT * FROM {table_name}"
     mycursor.execute(sql)
@@ -49,6 +50,7 @@ def getAllTableArray_Print(table_name):
         print(x) 
     logEvent(f"Records from {table_name} accessed.")
 
+# defunct
 def getAllTableArray_Return(table_name):
     sql = f"SELECT * FROM {table_name}"
     mycursor.execute(sql)
@@ -79,8 +81,6 @@ def getRecordsAsDictionary(table_name, records):
     logEvent(f"Records from {table_name} accessed.")
     return dictionaries
 
-######### i think i can combine a lot of excess code with this ^
-
 def deleteRecord(table_name, column, check_info):
     sql = f"DELETE FROM {table_name} WHERE {column} = '{check_info}'"
     mycursor.execute(sql)
@@ -107,7 +107,7 @@ def addRecordToTable(table_name, info_dict):
     mydb.commit()
     logEvent(f"{mycursor.rowcount}, record(s) inserted in {table_name}.")
 
-#### null
+# defunct
 def searchTable(table_name, search_column, search_term):
     sql = f"SELECT * FROM {table_name} WHERE {search_column} LIKE '%{search_term}%'"
     mycursor.execute(sql)
@@ -117,3 +117,28 @@ def searchTableFilter(table_name, search_column, search_term, filter_column, fil
     sql = f"SELECT * FROM {table_name} WHERE {search_column} LIKE '%{search_term}%' ORDER BY {filter_column} {filter_order}"
     mycursor.execute(sql)
     return getRecordsAsDictionary(table_name, mycursor.fetchall())
+
+####################################################################################################
+#####                   Orders                                                                 #####
+####################################################################################################
+
+def newOrder(customerID, date, shipping, ):
+    ##### different item weights may be different shipping #####
+    if shipping == "Expedited":
+        shipping_cost = 9.99
+    elif shipping == "Standard":
+        shipping_cost = 4.99
+    order_info = (
+        {"fk_customer_id": customerID},
+        {"order_date": date},
+        {"shipping_method": shipping},
+        {"order_status": "Processing"},
+        {"shipping_amount": shipping_cost},
+    )
+    addRecordToTable("orders", order_info)
+    ##### need to add orderlines and then calculate subtotal costs #####
+
+
+def addOrderLine(orderID):
+    pass
+
