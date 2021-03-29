@@ -94,7 +94,7 @@ def products_page():
     elif products_len % 3 == 2:
         products.append(0)
     for i in range(0, products_len, 3):
-            product_rows.append(products[i:i+3])
+        product_rows.append(products[i:i+3])
     return render_template('products_page.html', rows=product_rows, title='Products', form=search, results=results)
 
 ####################################################################################################
