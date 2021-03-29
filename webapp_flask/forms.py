@@ -29,11 +29,11 @@ from wtforms.validators import DataRequired, Length, Email, EqualTo
 
 class ProductSearchForm(FlaskForm):
     search = StringField('Search')
-    choices = [('Name_Alphabet', 'Name (A -> Z)'),
-                ('Name_Reverse_Alphabet', 'Name (Z -> A)'),
-                ('Quantity_High', 'Quantity (High -> Low)'),
-                ('Quantity_Low', 'Quantity (Low -> High)'),
-                ('Price_High', 'Price (High -> Low)'),
-                ('Price_Low', 'Price (Low -> High)')]
+    choices = [('11', 'Name (A -> Z)'), # the first part identifiies the column to search by, the second part specifies if its ascending or descending
+                ('10', 'Name (Z -> A)'),
+                ('20', 'Quantity (High -> Low)'),
+                ('21', 'Quantity (Low -> High)'),
+                ('30', 'Price (High -> Low)'),
+                ('31', 'Price (Low -> High)')]
     select = SelectField('Sort by:', choices=choices)
     submit = SubmitField('Enter search')
