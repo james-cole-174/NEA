@@ -37,3 +37,13 @@ class ProductSearchForm(FlaskForm):
                 ('31', 'Price (Low -> High)')]
     select = SelectField('Sort by:', choices=choices)
     submit = SubmitField('Enter search')
+
+class OrderSearchForm(FlaskForm):
+    choices = [('10', 'ID (High -> Low)'), # the first part identifiies the column to search by, the second part specifies if its ascending or descending
+                ('11', 'ID (Low -> High)'),
+                ('21', 'Status (A -> Z)'),
+                ('20', 'Status (Z -> A)'),
+                ('30', 'Price (High -> Low)'),
+                ('31', 'Price (Low -> High)')]
+    select = SelectField('Sort by:', choices=choices)
+    submit = SubmitField('Enter search')
