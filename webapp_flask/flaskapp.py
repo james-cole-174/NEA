@@ -60,7 +60,19 @@ def products_page():
     search = ProductSearchForm(request.form)
     results = True
     if request.method == 'POST':
-        products = msm.searchTable("products", "product_name", search.data["search"])
+        #products = msm.searchTable("products", "product_name", search.data["search"])
+        sort_method = search.data["select"]
+        if sort_method[0] == '1': # name
+            search_column = 'product_name'
+        elif sort_method[0] == '2': # quantity
+            search_column = 'quantity'
+        elif sort_method[0] == '3': # price
+            search_column = 'unit_price'
+        if sort_method[1] == '0':
+            sort_type = 'DESC'
+        elif sort_method[1] == '1':
+            sort_type = 'ASC'
+        products = msm.searchTableFilter("products", "product_name", search.data["search"], search_column, sort_type)
     else:
         products = msm.getAllTableDictionary("products")
     products_len = len(products)
