@@ -107,7 +107,11 @@ def addRecordToTable(table_name, info_dict):
     mydb.commit()
     logEvent(f"{mycursor.rowcount}, record(s) inserted in {table_name}.")
 
-# defunct
+def searchExact(table_name, search_column, search_term):
+    sql = f"SELECT * FROM {table_name} WHERE {search_column} LIKE '{search_term}'"
+    mycursor.execute(sql)
+    return getRecordsAsDictionary(table_name, mycursor.fetchall())
+
 def searchTable(table_name, search_column, search_term):
     sql = f"SELECT * FROM {table_name} WHERE {search_column} LIKE '%{search_term}%'"
     mycursor.execute(sql)
@@ -122,23 +126,34 @@ def searchTableFilter(table_name, search_column, search_term, filter_column, fil
 #####                   Orders                                                                 #####
 ####################################################################################################
 
-def newOrder(customerID, date, shipping, ):
+def newOrder(customerID, date, shipping, lines):
     ##### different item weights may be different shipping #####
     if shipping == "Expedited":
         shipping_cost = 9.99
     elif shipping == "Standard":
         shipping_cost = 4.99
-    order_info = (
-        {"fk_customer_id": customerID},
-        {"order_date": date},
-        {"shipping_method": shipping},
-        {"order_status": "Processing"},
-        {"shipping_amount": shipping_cost},
-    )
+    order_info = {
+        "fk_customer_id": str(customerID),
+        "order_date": str(date),
+        "shipping_method": shipping,
+        "order_status": "Processing",
+        "shipping_amount": str(shipping_cost),
+    }
     addRecordToTable("orders", order_info)
     ##### need to add orderlines and then calculate subtotal costs #####
+    for _ in range(lines):
+        product_cost += addOrderLine() #######################
 
 
-def addOrderLine(orderID):
-    pass
+def addOrderLine(orderID, productID, quantity):
+    record = searchExact("products", "product_id", productID)[0]
+    line_price = quantity * int(record["unit_price"])
+    order_line_info = {
+        "order_id": str(orderID),
+        "fk_product_id": str(productID),
+        "quantity": str(quantity),
+        "total_line_price": str(line_price)
+    }
+    addRecordToTable("order_lines", order_line_info)
+    
 
