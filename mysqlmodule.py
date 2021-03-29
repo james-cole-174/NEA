@@ -97,7 +97,13 @@ def addRecordToTable(table_name, info_dict):
     mydb.commit()
     logEvent(f"{mycursor.rowcount}, record(s) inserted in {table_name}.")
 
+#### null
 def searchTable(table_name, search_column, search_term):
     sql = f"SELECT * FROM {table_name} WHERE {search_column} LIKE '%{search_term}%'"
+    mycursor.execute(sql)
+    return getRecordsAsDictionary(table_name, mycursor.fetchall())
+
+def searchTableFilter(table_name, search_column, search_term, filter_column, filter_order):
+    sql = f"SELECT * FROM {table_name} WHERE {search_column} LIKE '%{search_term}%' ORDER BY {filter_column} {filter_order}"
     mycursor.execute(sql)
     return getRecordsAsDictionary(table_name, mycursor.fetchall())
