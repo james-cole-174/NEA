@@ -8,7 +8,7 @@ current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentfra
 parent_dir = os.path.dirname(current_dir)
 sys.path.insert(0, parent_dir)
 
-from forms import ProductSearchForm
+from forms import ProductSearchForm, OrderSearchForm
 from flask import Flask, escape, request, render_template, url_for 
 import mysqlmodule as msm
 
@@ -39,28 +39,41 @@ def home():
 
 @app.route('/customer', methods = ['GET', 'POST'])
 def customers_page():
+    '''
     search = SearchForm(request.form)
     if request.method == 'POST':
         return search_results(search)
+    '''
     customers = msm.getAllTableDictionary("customers")
     shipping_address = msm.getAllTableDictionary("shipping_address")
     return render_template('customers_page.html', customers=customers, title='Customers')
 
 @app.route('/order', methods = ['GET', 'POST'])
 def orders_page():
-    search = SearchForm(request.form)
+    search = OrderSearchForm(request.form)
+    results = True
     if request.method == 'POST':
-        return search_results(search)
-    orders = msm.getAllTableDictionary("orders")
-    order_lines = msm.getAllTableDictionary("order_lines")
-    return render_template('orders_page.html', orders=orders, order_lines=order_lines)
+        sort_method = search.data["select"]
+        if sort_method[0] == '1': # name
+            search_column = 'order_id'
+        elif sort_method[0] == '2': # status
+            search_column = 'order_status'
+        elif sort_method[0] == '3': # price
+            search_column = 'order_subtotal'
+        if sort_method[1] == '0':
+            sort_type = 'DESC'
+        elif sort_method[1] == '1':
+            sort_type = 'ASC'
+        orders = msm.searchTableFilter("orders", "order_id", "", search_column, sort_type)
+    else:
+        orders = msm.getAllTableDictionary("orders")
+    return render_template('orders_page.html', orders=orders, form=search)
 
 @app.route('/product', methods = ['GET', 'POST']) 
 def products_page():
     search = ProductSearchForm(request.form)
     results = True
     if request.method == 'POST':
-        #products = msm.searchTable("products", "product_name", search.data["search"])
         sort_method = search.data["select"]
         if sort_method[0] == '1': # name
             search_column = 'product_name'
