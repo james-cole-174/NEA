@@ -47,7 +47,7 @@
                             </button>
                             <!-- Modal -->
                             <div class="modal" id="orderDetails{{ order.order_id }}" tabindex="-1" role="dialog" aria-labelledby="moreDetails" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h4 class="modal-title" id="exampleModalLabel">Order ID: {{ order.order_id }}</h4>
@@ -58,7 +58,10 @@
                                         <div class="modal-body">
                                             <small class="text-muted">Status: {{ order.order_status }}</small>
                                             <small class="text-muted">Date: {{ order.order_date }}</small>
-                                            <p>Items: £{{ order.price_amount }} + Shipping: £{{ order.shipping_amount }}</p>
+                                            {% for line in order.order_lines %}
+                                                <p>£{{ line.total_line_price }} = {{ line.product_name }} x {{ line.quantity }}</p>
+                                            {% endfor %}
+                                            <p>Product subtotal = £{{ order.price_amount }} + Shipping: £{{ order.shipping_amount }}</p>
                                             <p>= Subtotal: £{{ order.order_subtotal }}</p>
                                         </div>
                                         <div class="modal-footer">
