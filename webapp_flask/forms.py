@@ -47,3 +47,8 @@ class OrderSearchForm(FlaskForm):
                 ('31', 'Price (Low -> High)')]
     select = SelectField('Sort by:', choices=choices)
     submit = SubmitField('Enter search')
+
+class ProfitSearchForm(FlaskForm):
+    choices = [('ASC', 'Recent'),
+                ('DESC', 'Older')]
+    select = SelectField('Sort by:', choices=choices)
