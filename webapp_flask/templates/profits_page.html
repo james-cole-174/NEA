@@ -21,4 +21,20 @@
             </div>
         </form>
     </article>
+    {% for month in months %}
+        {% for row in month %}
+        <article class="media content-section">
+            <div class="media-body">
+                <div class="row">
+                    <div class="col-sm">
+                        <h2>Month: {{ row.month }}</h2>
+                    </div>
+                    <div class="col-sm">
+                        <p>Orders: {{ row.orders }}</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    {% endfor %}
 {% endblock content %}
