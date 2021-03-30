@@ -63,6 +63,12 @@ def orders_page():
         orders = msm.searchTableFilter("orders", "order_id", "", search_column, sort_type)
     else:
         orders = msm.getAllTableDictionary("orders")
+    for order in orders:
+        orderID = order["order_id"]
+        order["order_lines"] = msm.searchExact("order_lines", "order_id", orderID)
+        for line in order["order_lines"]:
+            products = msm.searchExact("Products", "product_id", line["fk_product_id"])
+            line["product_name"] = products[0]["product_name"]
     return render_template('orders_page.html', orders=orders, form=search)
 
 @app.route('/product', methods = ['GET', 'POST']) 
