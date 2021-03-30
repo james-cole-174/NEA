@@ -87,8 +87,8 @@ def deleteRecord(table_name, column, check_info):
     mydb.commit()
     logEvent(f"{mycursor.rowcount}, record(s) deleted from {table_name}.")
 
-def updateRecord(table_name, column, check_info, new_info):
-    sql = f"UPDATE {table_name} SET {column} = '{new_info}' WHERE {column} = '{check_info}'"
+def updateRecord(table_name, column, check_info, new_info, check_column):
+    sql = f"UPDATE {table_name} SET {column} = '{new_info}' WHERE {check_column} = '{check_info}'"
     mycursor.execute(sql)
     mydb.commit()
     logEvent(f"{mycursor.rowcount}, record(s) updated in {table_name}.")
@@ -126,7 +126,7 @@ def searchTableFilter(table_name, search_column, search_term, filter_column, fil
 #####                   Orders                                                                 #####
 ####################################################################################################
 
-def newOrder(customerID, date, shipping, lines):
+def newOrder(customerID, date, shipping, products): # products is dictionary of products id as keys and quantity of product as values
     ##### different item weights may be different shipping #####
     if shipping == "Expedited":
         shipping_cost = 9.99
@@ -140,14 +140,26 @@ def newOrder(customerID, date, shipping, lines):
         "shipping_amount": str(shipping_cost),
     }
     addRecordToTable("orders", order_info)
+    print("added")
+    sql = f"SELECT order_id FROM Orders ORDER BY order_id DESC LIMIT 1"
+    mycursor.execute(sql)
+    orderID = mycursor.fetchall()[0][0]
+    print("got order_id", orderID)
     ##### need to add orderlines and then calculate subtotal costs #####
-    for _ in range(lines):
-        product_cost += addOrderLine() #######################
-
+    product_total = 0
+    for product in products.keys():
+        product_total += addOrderLine(orderID, product, products[product])
+    subtotal = product_total + shipping_cost
+    updateRecord("Orders", "price_amount", orderID, product_total, "order_ID")
+    updateRecord("Orders", "order_subtotal", orderID, subtotal, "order_ID")
+    print("done")
 
 def addOrderLine(orderID, productID, quantity):
     record = searchExact("products", "product_id", productID)[0]
-    line_price = quantity * int(record["unit_price"])
+    print(record["unit_price"])
+    print(quantity)
+    line_price = int(quantity) * int(record["unit_price"])
+    print(line_price)
     order_line_info = {
         "order_id": str(orderID),
         "fk_product_id": str(productID),
@@ -155,5 +167,6 @@ def addOrderLine(orderID, productID, quantity):
         "total_line_price": str(line_price)
     }
     addRecordToTable("order_lines", order_line_info)
-    
+    return line_price
+
 
