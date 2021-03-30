@@ -11,6 +11,8 @@ sys.path.insert(0, parent_dir)
 from forms import ProductSearchForm, OrderSearchForm, ProfitSearchForm
 from flask import Flask, escape, request, render_template, url_for 
 import mysqlmodule as msm
+import datetime
+from itertools import groupby
 
 ####################################################################################################
 #####                   Flask setup                                                            #####
@@ -40,9 +42,30 @@ def customers_page():
     return render_template('customers_page.html', customers=customers, title='Customers')
 
 @app.route('/profit', methods = ['GET', 'POST'])
-def profits_page():
+def profits_page(): ############# CROSS TABULATION WOOOOOOOOOO HOOOOOOOOO
     search = ProfitSearchForm(request.form)
-    return render_template('profits_page.html', form=search)
+    orders = msm.getAllTableDictionary("orders")
+    dates = []
+    for order in orders:
+        dates.append(datetime.date(int(order["order_date"][6:]), int(order["order_date"][3:5]), int(order["order_date"][:2])))
+    dates.sort() ##### sorting older to recent reverse=True for other way round
+    first_order = dates[0]
+    last_order = dates[len(dates)-1]
+    months = (last_order.month - first_order.month) + (12 * (last_order.year - first_order.year)) + 1
+    orders_month_array = []
+    count = 0
+    for i in range(1, months):
+        for date in dates:
+            if ((date.month - first_order.month + 1) + (12 * (date.year - first_order.year))) == i:
+                orders_month_array.append([orders[count]["order_id"], (date.month, date.year)])
+                count += 1
+    month_array = []
+    for key, group in groupby(orders_month_array, lambda x: x[1]):
+        members = []
+        for thing in group:
+            members.append(thing[0])
+        month_array.append([{"month":str(key), "orders":members}])
+    return render_template('profits_page.html', months=month_array, form=search)
 
 @app.route('/order', methods = ['GET', 'POST'])
 def orders_page():
