@@ -152,7 +152,6 @@ def newOrder(customerID, date, shipping, products): # products is dictionary of 
     subtotal = product_total + shipping_cost
     updateRecord("Orders", "price_amount", orderID, product_total, "order_ID")
     updateRecord("Orders", "order_subtotal", orderID, subtotal, "order_ID")
-    print("done")
 
 def addOrderLine(orderID, productID, quantity):
     record = searchExact("products", "product_id", productID)[0]
