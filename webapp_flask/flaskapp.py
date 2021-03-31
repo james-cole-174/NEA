@@ -8,7 +8,7 @@ current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentfra
 parent_dir = os.path.dirname(current_dir)
 sys.path.insert(0, parent_dir)
 
-from forms import ProductSearchForm, OrderSearchForm, ProfitSearchForm
+from forms import ProductSearchForm, OrderSearchForm
 from flask import Flask, escape, request, render_template, url_for 
 import mysqlmodule as msm
 import datetime
@@ -43,12 +43,11 @@ def customers_page():
 
 @app.route('/profit', methods = ['GET', 'POST'])
 def profits_page(): ############# CROSS TABULATION WOOOOOOOOOO HOOOOOOOOO
-    search = ProfitSearchForm(request.form)
     orders = msm.getAllTableDictionary("orders")
     dates = []
     for order in orders:
         dates.append(datetime.date(int(order["order_date"][6:]), int(order["order_date"][3:5]), int(order["order_date"][:2])))
-    dates.sort() ##### sorting older to recent reverse=True for other way round
+    dates.sort()
     first_order = dates[0]
     last_order = dates[len(dates)-1]
     months = (last_order.month - first_order.month) + (12 * (last_order.year - first_order.year)) + 1
@@ -65,7 +64,19 @@ def profits_page(): ############# CROSS TABULATION WOOOOOOOOOO HOOOOOOOOO
         for thing in group:
             members.append(thing[0])
         month_array.append([{"month":str(key), "orders":members}])
-    return render_template('profits_page.html', months=month_array, form=search)
+    for row in month_array:
+        order_details = []
+        for order in row[0]["orders"]:
+            order_details.append(msm.searchExact("Orders", "order_id", order)[0])
+        row[0]["order_details"] = order_details
+        order_total = 0
+        for order in row[0]["order_details"]:
+            order_total += order["order_subtotal"]
+        row[0]["order_total"] = order_total
+        date = row[0]["month"]
+        formatted_date = date.strip("()")
+        row[0]["month"] = formatted_date
+    return render_template('profits_page.html', months=month_array)
 
 @app.route('/order', methods = ['GET', 'POST'])
 def orders_page():
