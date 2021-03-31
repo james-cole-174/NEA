@@ -1,30 +1,30 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>Profits</h1>
-    {% for month in months %}
-        {% for row in month %}
-        <article class="media content-section">
-            <div class="media-body">
-                <div class="row">
-                    <div class="col-sm">
-                        <h2>Month: {{ row.month }}</h2>
-                    </div>
-                    <div class="col-sm">
-                        {% for order in row.order_details %}
-                            <p>Order ID: {{ order.order_id }}</p>
-                        {% endfor %}
-                    </div>
-                    <div class="col-sm">
-                        {% for order in row.order_details %}
-                            <p>Subtotal: £{{ order.order_subtotal }}</p>
-                        {% endfor %}
-                    </div>
-                    <div class="col-sm">
-                        <p>Monthly Total: £{{ row.order_total }}</p>
-                    </div>
-                </div>
-            </div>
-        </article>
-        {% endfor %}
+<h1>Profits</h1>
+{% for month in months %}
+    {% for row in month %}
+    <article class="media content-section">
+        <div class="media-body">
+        <div class="row">
+        <div class="col-sm">
+            <h2>Month: {{ row.month }}</h2>
+        </div>
+        <div class="col-sm">
+            {% for order in row.order_details %}
+                <p>Order ID: {{ order.order_id }}</p>
+            {% endfor %}
+        </div>
+        <div class="col-sm">
+            {% for order in row.order_details %}
+                <p>Subtotal: £{{ order.order_subtotal }}</p>
+            {% endfor %}
+        </div>
+        <div class="col-sm">
+            <p>Monthly Total: £{{ row.order_total }}</p>
+        </div>
+        </div>
+        </div>
+    </article>
     {% endfor %}
+{% endfor %}
 {% endblock content %}

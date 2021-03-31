@@ -9,7 +9,6 @@ from datetime import datetime
 #####                   Database connection                                                    #####
 ####################################################################################################
 
-# PC
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
@@ -17,15 +16,6 @@ mydb = mysql.connector.connect(
     database="mydatabase"
 )
 
-# LAPTOP
-'''
-mydb = mysql.connector.connect(
-    host="localhost",
-    user="admin",
-    password="admin",
-    database="MYSQL"
-)
-'''
 mycursor = mydb.cursor()
 
 ####################################################################################################
@@ -40,24 +30,6 @@ def logEvent(log_info):
 ####################################################################################################
 #####                   Database I/O                                                           #####
 ####################################################################################################
-
-# defunct
-def getAllTableArray_Print(table_name):
-    sql = f"SELECT * FROM {table_name}"
-    mycursor.execute(sql)
-    result_values = mycursor.fetchall()
-    for x in result_values:
-        print(x) 
-    logEvent(f"Records from {table_name} accessed.")
-
-# defunct
-def getAllTableArray_Return(table_name):
-    sql = f"SELECT * FROM {table_name}"
-    mycursor.execute(sql)
-    result_values = mycursor.fetchall()
-    logEvent(f"Records from {table_name} accessed.")
-    for x in result_values:
-        return x 
 
 def getAllTableDictionary(table_name):
     sql = f"SELECT * FROM {table_name}"
@@ -167,5 +139,3 @@ def addOrderLine(orderID, productID, quantity):
     }
     addRecordToTable("order_lines", order_line_info)
     return line_price
-
-
