@@ -1,26 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
     <h1>Profits</h1>
-    <article class="media content-section">
-        {% from "_formhelpers.html" import render_field %}
-        <form method="post">
-            <div class="row">
-                <div class="col">
-                    <h3>Filters</h3>
-                </div>
-                <div class="col">
-                    <div class="mb-3">
-                        {{ render_field(form.select) }}
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="mt-2">
-                        <button type="submit" class="btn btn-primary">Search</button>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </article>
     {% for month in months %}
         {% for row in month %}
         <article class="media content-section">
@@ -30,7 +10,17 @@
                         <h2>Month: {{ row.month }}</h2>
                     </div>
                     <div class="col-sm">
-                        <p>Orders: {{ row.orders }}</p>
+                        {% for order in row.order_details %}
+                            <p>Order ID: {{ order.order_id }}</p>
+                        {% endfor %}
+                    </div>
+                    <div class="col-sm">
+                        {% for order in row.order_details %}
+                            <p>Subtotal: £{{ order.order_subtotal }}</p>
+                        {% endfor %}
+                    </div>
+                    <div class="col-sm">
+                        <p>Monthly Total: £{{ row.order_total }}</p>
                     </div>
                 </div>
             </div>
