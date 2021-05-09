@@ -9,12 +9,29 @@ from datetime import datetime
 #####                   Database connection                                                    #####
 ####################################################################################################
 
+<<<<<<< Updated upstream
+=======
+'''
+# PC
+>>>>>>> Stashed changes
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
     password="^9#^QsfJRZ",
     database="mydatabase"
 )
+<<<<<<< Updated upstream
+=======
+'''
+# LAPTOP
+
+mydb = mysql.connector.connect(
+    host="localhost",
+    user="admin",
+    password="admin",
+    database="MYSQL"
+)
+>>>>>>> Stashed changes
 
 mycursor = mydb.cursor()
 
